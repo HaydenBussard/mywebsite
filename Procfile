@@ -1,1 +1,1 @@
-"web: gunicorn hmb-website.wsgi --log-file -" 
+web: gunicorn hmbwebsite.wsgi --log-file -

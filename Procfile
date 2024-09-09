@@ -1,1 +1,1 @@
-web: gunicorn hmbwebsite.wsgi --log-file -
+web: gunicorn my_website.wsgi --log-file -

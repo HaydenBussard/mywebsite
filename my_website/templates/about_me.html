@@ -23,14 +23,15 @@
             </div>
 
             <!-- PDF preview for desktop -->
-            <div class="d-none d-md-block my-4">
+            <!-- <div class="d-none d-md-block my-4">
                 <h3>Resume Preview</h3>
                 <embed src="{% static 'documents/Hayden_Bussard_Resume.pdf' %}" type="application/pdf" width="100%" height="600px" />
-            </div>
+            </div> -->
 
             <!-- This is the Google Docs Viewer -->
             <!-- <div class="pdf-container"> -->
             <div>
+                <h3>Resume Preview</h3>
                 <iframe src="https://docs.google.com/viewer?url=https://www.haydenbussard.com{% static 'documents/Hayden_Bussard_Resume.pdf' %}&embedded=true" width="100%" height="600px" style="border: none;"></iframe>
                 <p>If the preview doesn't load, you can <a href="{% static 'documents/Hayden_Bussard_Resume.pdf' %}" download>download the PDF here</a>.</p>
             </div>

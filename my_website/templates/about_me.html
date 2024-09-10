@@ -8,32 +8,33 @@
     <div class="row">
         <div class="col-md-8 offset-md-2">
             <h1 class="mb-4">About Hayden Bussard</h1>
-                <!-- Add the headshot here -->
-                <div class="text-center mb-4">
-                    <img src="{% static 'images/headshot.jpg' %}" alt="Hayden Bussard" class="rounded-circle img-fluid" style="max-width: 200px;">
-                </div>
-            <p class="lead">Hello! I'm Hayden Bussard, a mechanical engineer based in Ocean Township, NJ.</p>
             
-            <h2 class="mt-5 mb-3">My Expertise</h2>
-            <p>[Brief description of your skills and experience]</p>
+            <div class="text-center mb-4">
+                <img src="{% static 'images/headshot.jpg' %}" alt="Hayden Bussard" class="rounded-circle img-fluid" style="max-width: 200px;">
+            </div>
             
-            <h2 class="mt-5 mb-3">Projects</h2>
-            <p>[Highlight a few key projects or achievements]</p>
-            
-            <h2 class="mt-5 mb-3">Get in Touch</h2>
-            <p>I'm always open to new opportunities and collaborations. Feel free to reach out!</p>
-                <!-- Add the call-to-action here -->
-                <div class="text-center mt-5">
-                    <a href="{% url 'contact' %}" class="btn btn-primary btn-lg">Contact Me</a>
-                </div>
-            <ul class="list-unstyled">
-                <li><i class="bi bi-telephone-fill me-2"></i> Phone: <a href="tel:+14127227076">412-722-7076</a> (<a href="sms:+14127227076">Text</a>)</li>
-                <li><i class="bi bi-envelope-fill me-2"></i> <a href="mailto:haydenbussard@outlook.com">haydenbussard@outlook.com</a></li>
-                <li><i class="bi bi-linkedin me-2"></i> <a href="https://www.linkedin.com/in/yourusername">LinkedIn Profile</a></li>
-                <li><i class="bi bi-github me-2"></i> <a href="https://github.com/yourusername">GitHub Profile</a></li>
-            </ul>
+            <p class="lead">Hello! I'm Hayden Bussard, a [Your Profession/Title] based in [Your Location].</p>
+
+            <!-- Menu for Skills and Projects -->
+            <div class="my-4">
+                <h2>Explore More</h2>
+                <ul class="nav flex-column">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'skills' %}">My Skills</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'projects' %}">My Projects</a>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Rest of your about me content -->
+            <h2>My Background</h2>
+            <p>[Your background information]</p>
+
+            <h2>My Interests</h2>
+            <p>[Your interests and hobbies]</p>
         </div>
     </div>
 </div>
 {% endblock %}
-

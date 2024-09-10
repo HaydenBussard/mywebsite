@@ -1,20 +1,37 @@
 {% extends 'base.html' %}
 
-{% block title %}About Me - Hayden Bussard{% endblock %}
+{% block title %}Contact - Hayden Bussard{% endblock %}
 
 {% block content %}
-<h1>About Hayden Bussard</h1>
-    <p>Hello! I'm Hayden Bussard, a mechanical engineer based in Ocean Township, NJ.</p>
-    <h2>My Skills</h2>
-    <ul>
-        <li>Skill 1</li>
-        <li>Skill 2</li>
-        <li>Skill 3</li>
-    </ul>
-    <h2>My Interests</h2>
-    <p>When I'm not working, I enjoy golf.</p>
-    <h2>Contact Me</h2>
-    <p>Feel free to reach out to me at https://www.linkedin.com/in/haydenbussard/.</p>
-</body>
-</html>
+<div class="container my-5">
+    <h1 class="mb-4">Contact Me</h1>
+    <div class="row">
+        <div class="col-md-6">
+            <form>
+                <div class="mb-3">
+                    <label for="name" class="form-label">Name</label>
+                    <input type="text" class="form-control" id="name" required>
+                </div>
+                <div class="mb-3">
+                    <label for="email" class="form-label">Email</label>
+                    <input type="email" class="form-control" id="email" required>
+                </div>
+                <div class="mb-3">
+                    <label for="message" class="form-label">Message</label>
+                    <textarea class="form-control" id="message" rows="5" required></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary">Send Message</button>
+            </form>
+        </div>
+        <div class="col-md-6">
+            <h3>Get in Touch</h3>
+            <p>I'd love to hear from you! Whether you have a question about my work, want to discuss a potential project, or just want to say hello, feel free to reach out.</p>
+            <ul class="list-unstyled">
+                <li><i class="bi bi-envelope-fill me-2"></i> Email: haydenbussard@outlook.com</li>
+                <li><i class="bi bi-linkedin me-2"></i> LinkedIn: <a href="https://www.linkedin.com/in/yourusername">linkedin.com/in/yourusername</a></li>
+                <li><i class="bi bi-github me-2"></i> GitHub: <a href="https://github.com/HaydenBussard">github.com/HaydenBussard</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
 {% endblock %}

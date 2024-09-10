@@ -19,7 +19,7 @@
             <div class="my-4">
                 <h2>My Resume</h2>
                 <a href="{% static 'documents/Hayden_Bussard_Resume.pdf' %}" class="btn btn-primary" download>Download Resume</a>
-                <a href="{% static 'documents/Hayden Bussard - Resume.pdf' %}" class="btn btn-secondary" target="_blank">View Resume</a>
+                <a href="{% static 'documents/Hayden_Bussard_Resume.pdf' %}" class="btn btn-secondary" target="_blank">View Resume</a>
             </div>
 
             <!-- PDF preview for desktop -->
@@ -28,16 +28,10 @@
                 <embed src="{% static 'documents/Hayden_Bussard_Resume.pdf' %}" type="application/pdf" width="100%" height="600px" />
             </div>
 
-            <!-- Image preview for mobile -->
+            <!-- This is the Google Docs Viewer -->
             <div class="pdf-container">
-                <!-- Fallback for mobile -->
-                <div class="d-md-none">
-                    <p>PDF preview not available on mobile. <a href="{% static 'documents/Hayden_Bussard_Resume.pdf' %}" class="btn btn-primary">Download PDF</a></p>
-                </div>
+                <iframe src="https://docs.google.com/viewer?url=https://www.haydenbussard.com{% static 'documents/Hayden_Bussard_Resume.pdf' %}&embedded=true" width="100%" height="600px" style="border: none;"></iframe>
             </div>
-            <p>This is the Google Docs Viewer.</p>
-            <iframe src="https://docs.google.com/viewer?url=http://www.africau.edu/images/default/sample.pdf&embedded=true" width="100%" height="600px" style="border: none;"></iframe>
-            <iframe src="https://docs.google.com/viewer?url=https://www.haydenbussard.com{% static 'documents/Hayden_Bussard_Resume.pdf' %}&embedded=true" width="100%" height="600px" style="border: none;"></iframe>
             <!-- Menu for Skills and Projects -->
             <div class="my-4">
                 <h2>Explore More</h2>

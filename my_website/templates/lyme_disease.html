@@ -89,13 +89,14 @@
 </div>
 {% endblock %}
 
-{% block extra_js %}
+{% block js %}
+{{ block.super }}
 <script>
-    // Ensure proper functioning of Bootstrap collapse
-    $('.collapse').on('show.bs.collapse', function () {
+    // Your existing JavaScript for the Lyme Disease page
+    $('.collapse').on('shown.bs.collapse', function () {
         $(this).prev('.card-header').find('.btn-link').attr('aria-expanded', 'true');
     });
-    $('.collapse').on('hide.bs.collapse', function () {
+    $('.collapse').on('hidden.bs.collapse', function () {
         $(this).prev('.card-header').find('.btn-link').attr('aria-expanded', 'false');
     });
 </script>

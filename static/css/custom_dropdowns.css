@@ -1,0 +1,24 @@
+.custom-collapse-btn {
+    display: block;
+    width: 100%;
+    text-align: left;
+    padding: 10px 15px;
+    color: #333;
+    background-color: #f8f9fa;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+}
+.custom-collapse-btn:hover, .custom-collapse-btn:focus {
+    background-color: #e9ecef;
+    text-decoration: none;
+}
+.custom-collapse-btn::after {
+    content: '\25BC';
+    float: right;
+    transform: rotate(0deg);
+    transition: transform 0.3s ease;
+}
+.custom-collapse-btn[aria-expanded="true"]::after {
+    transform: rotate(180deg);
+}

@@ -7,118 +7,15 @@
 <div class="container my-5">
     <h1 class="mb-4">Lyme Disease Resources</h1>
 
-    <!-- My Experience Section -->
-    <div class="card mb-4">
-        <div class="card-header" id="experienceHeader">
-            <h2 class="mb-0">
-                <!-- <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#experienceContent" aria-expanded="false" aria-controls="experienceContent"> -->
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                    My Experience with Lyme Disease
-                </button>
-            </h2>
-        </div>
-        <div id="experienceContent" class="collapse" aria-labelledby="experienceHeader">
-            <div class="card-body">
-                <p>Here, you can share your personal experience with Lyme disease. This content will be hidden by default and can be expanded when clicked.</p>
-                <p>You can add multiple paragraphs, lists, or other HTML elements to structure your story.</p>
-            </div>
-        </div>
-    </div>
-
-    <!-- <nav class="navbar navbar-expand-lg navbar-light bg-light"></nav>
-        <div class="container">
-            <a class="navbar-brand" href="{% url 'home' %}">Hayden Bussard</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav">
-                    <li class="nav-item"><a class="nav-link" href="{% url 'home' %}">Home</a></li>
-                    <li class="nav-item"><a class="nav-link" href="{% url 'about' %}">Resume</a></li>
-                    <li class="nav-item"><a class="nav-link" href="{% url 'lyme_disease' %}">Lyme Disease</a></li>
-                    <li class="nav-item"><a class="nav-link" href="{% url 'bells_palsy' %}">Bell's Palsy</a></li>
-                    <li class="nav-item"><a class="nav-link" href="{% url 'contact' %}">Contact</a>
-                    <li class="nav-item"><a class="nav-link" href="{% url 'skills' %}">Skills</a></li>
-                    <li class="nav-item"><a class="nav-link" href="{% url 'projects' %}">Projects</a></li>
-                </ul>
-            </div>
-        </div>
-    </nav> -->
-
-    <!-- Helpful Resources Section -->
-    <h2 class="mb-3">Helpful Resources</h2>
-
-    <!-- Social Media Resources -->
-    <div class="card mb-4">
-        <div class="card-header" id="socialMediaHeader">
-            <h3 class="mb-0">
-                <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#socialMediaContent" aria-expanded="false" aria-controls="socialMediaContent">
-                    Social Media Accounts
-                </button>
-            </h3>
-        </div>
-        <div id="socialMediaContent" class="collapse" aria-labelledby="socialMediaHeader">
-            <div class="card-body">
-                <ul>
-                    <li><a href="#" target="_blank">Instagram Account 1</a></li>
-                    <li><a href="#" target="_blank">Twitter Account 2</a></li>
-                    <!-- Add more social media resources as needed -->
-                </ul>
-            </div>
-        </div>
-    </div>
-
-    <!-- Product Recommendations -->
-    <div class="card mb-4">
-        <div class="card-header" id="productsHeader">
-            <h3 class="mb-0">
-                <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#productsContent" aria-expanded="false" aria-controls="productsContent">
-                    Helpful Products
-                </button>
-            </h3>
-        </div>
-        <div id="productsContent" class="collapse" aria-labelledby="productsHeader">
-            <div class="card-body">
-                <ul>
-                    <li><a href="#" target="_blank">Product 1 on Amazon</a> - Brief description</li>
-                    <li><a href="#" target="_blank">Product 2 on Amazon</a> - Brief description</li>
-                    <!-- Add more product recommendations as needed -->
-                </ul>
-            </div>
-        </div>
-    </div>
-
-    <!-- Additional Resources -->
-    <div class="card mb-4">
-        <div class="card-header" id="additionalResourcesHeader">
-            <h3 class="mb-0">
-                <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#additionalResourcesContent" aria-expanded="false" aria-controls="additionalResourcesContent">
-                    Additional Resources
-                </button>
-            </h3>
-        </div>
-        <div id="additionalResourcesContent" class="collapse" aria-labelledby="additionalResourcesHeader">
-            <div class="card-body">
-                <ul>
-                    <li><a href="#" target="_blank">Lyme Disease Association</a></li>
-                    <li><a href="#" target="_blank">CDC Lyme Disease Information</a></li>
-                    <!-- Add more resources as needed -->
-                </ul>
-            </div>
+    <p>
+        <a class="btn btn-primary" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+            Click to expand/collapse
+        </a>
+    </p>
+    <div class="collapse" id="collapseExample">
+        <div class="card card-body">
+            This is some placeholder content for a collapsible element. It will expand when clicked.
         </div>
     </div>
 </div>
-{% endblock %}
-
-{% block js %}
-{{ block.super }}
-<script>
-    // Your existing JavaScript for the Lyme Disease page
-    $('.collapse').on('shown.bs.collapse', function () {
-        $(this).prev('.card-header').find('.btn-link').attr('aria-expanded', 'true');
-    });
-    $('.collapse').on('hidden.bs.collapse', function () {
-        $(this).prev('.card-header').find('.btn-link').attr('aria-expanded', 'false');
-    });
-</script>
 {% endblock %}

@@ -27,4 +27,5 @@ urlpatterns = [
     path('skills/', views.skills, name='skills'),
     path('projects/', views.projects, name='projects'),
     path('contact/', views.contact, name='contact'),
+    path('site-info/', views.website_info, name='website_info')
 ]

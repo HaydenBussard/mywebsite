@@ -19,6 +19,11 @@
             
             <p class="lead mb-5">I designed this website to be user-friendly and informative, featuring sections dedicated to my professional background, personal stories, and helpful resources that I have found beneficial in my recovery. Thank you for visiting, and I hope you find the information here helpful!</p>
             
+            <!-- Added subtle link to website_info page -->
+            <p class="mt-5 text-muted small">
+                To see more about how I developed this website, click <a href="{% url 'website_info' %}">here</a>.
+            </p>
+
             <div class="row">
                 <div class="col-md-4 mb-3">
                     <a href="{% url 'about' %}" class="btn btn-primary btn-lg btn-block">Professional Resume</a>
@@ -30,6 +35,8 @@
                     <a href="{% url 'bells_palsy' %}" class="btn btn-success btn-lg btn-block">Bell's Palsy Resources</a>
                 </div>
             </div>
+            
+            
         </div>
     </div>
 </div>

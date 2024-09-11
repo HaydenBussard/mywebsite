@@ -20,3 +20,6 @@ def lyme_disease(request):
 
 def bells_palsy(request):
     return render(request, 'bells_palsy.html')
+
+def website_info(request):
+    return render(request, 'website_info.html')

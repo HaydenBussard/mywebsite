@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}How This Website Was Built{% endblock %}
+
+{% block content %}
+<div class="container my-5">
+    <div class="row">
+        <div class="col-lg-8 offset-lg-2">
+            <h1 class="mb-4">How This Website Was Built</h1>
+            
+            <p class="lead">
+                This website was developed using Django, a high-level Python web framework. I leveraged Bootstrap for responsive design and custom CSS for unique styling. The site is deployed on Heroku, a cloud platform that enables easy scaling and management.
+            </p>
+
+            <h2 class="mt-5 mb-3">Key Features</h2>
+            <ul class="list-group list-group-flush mb-4">
+                <li class="list-group-item">Server-side rendering with Django templates</li>
+                <li class="list-group-item">Responsive layout using Bootstrap 5</li>
+                <li class="list-group-item">Custom JavaScript for interactive elements</li>
+                <li class="list-group-item">Static file management with WhiteNoise</li>
+                <li class="list-group-item">Version control via Git and GitHub</li>
+                <li class="list-group-item">Continuous deployment through Heroku's GitHub integration</li>
+            </ul>
+
+            <p class="mt-4">
+                Building this site has been a journey in full-stack development, combining backend logic with frontend design to create a personalized web presence.
+            </p>
+
+            <div class="mt-5">
+                <h3>Technologies Used</h3>
+                <div class="d-flex flex-wrap justify-content-start align-items-center">
+                    <img src="{% static 'images/django-logo.png' %}" alt="Django" class="m-2" style="height: 50px;">
+                    <img src="{% static 'images/python-logo.png' %}" alt="Python" class="m-2" style="height: 50px;">
+                    <img src="{% static 'images/bootstrap-logo.png' %}" alt="Bootstrap" class="m-2" style="height: 50px;">
+                    <img src="{% static 'images/heroku-logo.png' %}" alt="Heroku" class="m-2" style="height: 50px;">
+                    <img src="{% static 'images/github-logo.png' %}" alt="GitHub" class="m-2" style="height: 50px;">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

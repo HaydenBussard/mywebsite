@@ -13,13 +13,32 @@
                 <img src="{% static 'images/headshot.JPG' %}" alt="Hayden Bussard" class="rounded-circle img-fluid" style="max-width: 200px;">
             </div>
             
-            <p class="lead mb-5">Explore my professional background or find resources on chronic Lyme disease and Bell's Palsy.</p>
+            <p class="lead mb-5">Welcome to my personal website! Here you can explore my professional background or find resources on chronic Lyme disease and Bell's Palsy.</p>
+
+            <div class="row mb-5">
+                <div class="col-md-6">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <h2 class="card-title">Professional Profile</h2>
+                            <p class="card-text">Learn about my background as a mechanical engineer and explore my professional experiences.</p>
+                            <a href="{% url 'about' %}" class="btn btn-primary">View My Resume</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <h2 class="card-title">Health Resources</h2>
+                            <p class="card-text">Find valuable information and resources about chronic Lyme disease and Bell's Palsy.</p>
+                            <a href="{% url 'lyme_disease' %}" class="btn btn-info mr-2">Lyme Disease</a>
+                            <a href="{% url 'bells_palsy' %}" class="btn btn-success">Bell's Palsy</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
             
-            <p class="lead mb-5">Welcome to my personal website! This platform was created to share my journey and experiences, particularly in navigating chronic Lyme disease and Bell's Palsy. Developed using Django, a powerful web framework, this site showcases my skills as a mechanical engineer while providing valuable resources for others facing similar challenges.</p>
+            <p class="lead mb-5">This website showcases my skills as a mechanical engineer while providing valuable resources for others facing similar health challenges. I hope you find the information here helpful!</p>
             
-            <p class="lead mb-5">I designed this website to be user-friendly and informative, featuring sections dedicated to my professional background, personal stories, and helpful resources that I have found beneficial in my recovery. Thank you for visiting, and I hope you find the information here helpful!</p>
-            
-            <!-- Added subtle link to website_info page -->
             <div class="mt-5 text-muted">
                 <p>
                     This website was developed using Django (a Python web framework), Bootstrap for responsive design, and it's hosted on Heroku, allowing for easy scaling and management.
@@ -28,19 +47,6 @@
                     To learn more about how this site was built, click <a href="{% url 'website_info' %}">here</a>.
                 </p>
             </div>
-            <div class="row">
-                <div class="col-md-4 mb-3">
-                    <a href="{% url 'about' %}" class="btn btn-primary btn-lg btn-block">Professional Resume</a>
-                </div>
-                <div class="col-md-4 mb-3">
-                    <a href="{% url 'lyme_disease' %}" class="btn btn-info btn-lg btn-block">Lyme Disease Resources</a>
-                </div>
-                <div class="col-md-4 mb-3">
-                    <a href="{% url 'bells_palsy' %}" class="btn btn-success btn-lg btn-block">Bell's Palsy Resources</a>
-                </div>
-            </div>
-            
-            
         </div>
     </div>
 </div>

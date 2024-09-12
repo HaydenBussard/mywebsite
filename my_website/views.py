@@ -23,3 +23,6 @@ def bells_palsy(request):
 
 def website_info(request):
     return render(request, 'website_info.html')
+
+def health_resources(request):
+    return render(request, 'health_resources.html')

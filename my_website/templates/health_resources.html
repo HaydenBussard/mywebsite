@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Health Resources - Hayden Bussard{% endblock %}
+
+{% block content %}
+<div class="container my-5">
+    <h1 class="mb-4">Health Resources</h1>
+
+    <div class="card mb-5">
+        <div class="card-body">
+            <h2 class="card-title">Why This Section Exists</h2>
+            <p class="card-text">
+                I created this section of my website because I understand firsthand how limited resources can be for certain health issues, particularly Lyme Disease and Bell's Palsy. My goal is to provide a comprehensive collection of information, resources, and personal experiences in one place for those who may be struggling with these conditions.
+            </p>
+            <p class="card-text">
+                By sharing my own experiences, I hope to convey that I truly understand the challenges you may be facing. Whether you're looking for information, support, or simply someone who understands, you've come to the right place.
+            </p>
+            <p class="card-text">
+                If you need someone to talk to or have any questions, please don't hesitate to <a href="{% url 'contact' %}">contact me</a>. I'm here to help in any way I can.
+            </p>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6 mb-4">
+            <div class="card h-100">
+                <div class="card-body">
+                    <h2 class="card-title">Lyme Disease Resources</h2>
+                    <p class="card-text">Find information, personal experiences, and helpful resources related to Lyme Disease.</p>
+                    <a href="{% url 'lyme_disease' %}" class="btn btn-primary">Explore Lyme Disease Resources</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 mb-4">
+            <div class="card h-100">
+                <div class="card-body">
+                    <h2 class="card-title">Bell's Palsy Resources</h2>
+                    <p class="card-text">Discover resources, personal stories, and support for those dealing with Bell's Palsy.</p>
+                    <a href="{% url 'bells_palsy' %}" class="btn btn-primary">Explore Bell's Palsy Resources</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

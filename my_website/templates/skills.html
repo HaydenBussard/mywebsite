@@ -1,20 +1,55 @@
 {% extends 'base.html' %}
+{% load static %}
 
-{% block title %}About Me - Hayden Bussard{% endblock %}
+{% block title %}Skills - Hayden Bussard{% endblock %}
 
 {% block content %}
-<h1>About Hayden Bussard</h1>
-    <p>Hello! I'm Hayden Bussard, a mechanical engineer based in Ocean Township, NJ.</p>
-    <h2>My Skills</h2>
-    <ul>
-        <li>Skill 1</li>
-        <li>Skill 2</li>
-        <li>Skill 3</li>
-    </ul>
-    <h2>My Interests</h2>
-    <p>When I'm not working, I enjoy golf.</p>
-    <h2>Contact Me</h2>
-    <p>Feel free to reach out to me at https://www.linkedin.com/in/haydenbussard/.</p>
-</body>
-</html>
+<div class="container my-5">
+    <h1 class="mb-4">My Skills</h1>
+
+    <div class="row">
+        <div class="col-md-6 mb-4">
+            <h2>Technical Skills</h2>
+            <ul class="list-group">
+                <li class="list-group-item">Engineering Design</li>
+                <li class="list-group-item">Project Management</li>
+                <li class="list-group-item">Requirements Analysis</li>
+                <li class="list-group-item">Rapid Prototyping</li>
+                <li class="list-group-item">Technical Communication</li>
+            </ul>
+        </div>
+        <div class="col-md-6 mb-4">
+            <h2>Soft Skills</h2>
+            <ul class="list-group">
+                <li class="list-group-item">Time Management</li>
+                <li class="list-group-item">Customer/Vendor Relationships</li>
+                <li class="list-group-item">Collaboration</li>
+                <li class="list-group-item">Adaptability</li>
+                <li class="list-group-item">Positive Mental Attitude</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6 mb-4">
+            <h2>Business Skills</h2>
+            <ul class="list-group">
+                <li class="list-group-item">New Business Development</li>
+                <li class="list-group-item">Budgeting & Forecasting</li>
+                <li class="list-group-item">Industry Insight</li>
+            </ul>
+        </div>
+        <div class="col-md-6 mb-4">
+            <h2>Technical Proficiencies</h2>
+            <ul class="list-group">
+                <li class="list-group-item">MS Office</li>
+                <li class="list-group-item">SAP</li>
+                <li class="list-group-item">Autodesk Inventor</li>
+                <li class="list-group-item">SolidWorks</li>
+                <li class="list-group-item">Python</li>
+                <li class="list-group-item">SQL</li>
+            </ul>
+        </div>
+    </div>
+</div>
 {% endblock %}

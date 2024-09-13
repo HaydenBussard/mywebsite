@@ -1,19 +1,19 @@
 {% extends 'base.html' %}
 {% load static %}
 
-{% block title %}About Hayden Bussard{% endblock %}
+{% block title %}Professional Profile - Hayden Bussard{% endblock %}
 
 {% block content %}
 <div class="container my-5">
     <div class="row">
         <div class="col-md-8 offset-md-2">
-            <h1 class="mb-4">About Hayden Bussard</h1>
+            <h1 class="mb-4">Professional Profile</h1>
             
             <div class="text-center mb-4">
                 <img src="{% static 'images/headshot.JPG' %}" alt="Hayden Bussard" class="rounded-circle img-fluid" style="max-width: 200px;">
             </div>
             
-            <p class="lead">Hello! I'm Hayden Bussard, a mechanical engineer based in Ocean Township, NJ.</p>
+            <p class="lead">Hello! I'm Hayden Bussard, a mechanical engineer with a diverse skill set based in Ocean Township, NJ.</p>
 
             <!-- Resume Download and Preview -->
             <div class="my-4">
@@ -22,39 +22,34 @@
                 <a href="{% static 'documents/Hayden_Bussard_Resume.pdf' %}" class="btn btn-secondary" target="_blank">View Resume</a>
             </div>
 
-            <!-- PDF preview for desktop -->
-            <!-- <div class="d-none d-md-block my-4">
-                <h3>Resume Preview</h3>
-                <embed src="{% static 'documents/Hayden_Bussard_Resume.pdf' %}" type="application/pdf" width="100%" height="600px" />
-            </div> -->
-
-            <!-- This is the Google Docs Viewer -->
-            <!-- <div class="pdf-container"> -->
+            <!-- Google Docs Viewer -->
             <div>
                 <h3>Resume Preview</h3>
                 <iframe src="https://docs.google.com/viewer?url=https://www.haydenbussard.com{% static 'documents/Hayden_Bussard_Resume.pdf' %}&embedded=true" width="100%" height="600px" style="border: none;"></iframe>
                 <p>If the preview doesn't load, you can <a href="{% static 'documents/Hayden_Bussard_Resume.pdf' %}" download>download the PDF here</a>.</p>
             </div>
-            <!-- </div> -->
-            <!-- Menu for Skills and Projects -->
+
+            <!-- Menu for Skills, Projects, and Beyond Engineering -->
             <div class="my-4">
                 <h2>Explore More</h2>
-                <ul class="nav flex-column">
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'skills' %}">My Skills</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'projects' %}">My Projects</a>
-                    </li>
-                </ul>
+                <div class="row">
+                    <div class="col-md-4 mb-3">
+                        <a href="{% url 'skills' %}" class="btn btn-outline-primary btn-block">My Skills</a>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <a href="{% url 'projects' %}" class="btn btn-outline-primary btn-block">My Projects</a>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <a href="{% url 'beyond_engineering' %}" class="btn btn-outline-primary btn-block">Beyond Engineering</a>
+                    </div>
+                </div>
             </div>
 
-            <!-- Rest of your about me content -->
-            <h2>My Background</h2>
-            <p>[Your background information]</p>
-
-            <h2>My Interests</h2>
-            <p>reading & golf</p>
+            <!-- Brief overview -->
+            <div class="my-4">
+                <h2>At a Glance</h2>
+                <p>As a mechanical engineer with a passion for innovation, I bring a unique blend of technical expertise and creative problem-solving to every project. My experience extends beyond traditional engineering, encompassing web development, data analysis, and project management.</p>
+            </div>
         </div>
     </div>
 </div>

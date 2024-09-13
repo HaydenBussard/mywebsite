@@ -26,3 +26,6 @@ def website_info(request):
 
 def health_resources(request):
     return render(request, 'health_resources.html')
+
+def beyond_engineering(request):
+    return render(request, 'beyond_engineering.html')

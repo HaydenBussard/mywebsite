@@ -29,7 +29,7 @@ DEBUG = os.getenv('DEBUG') == 'True'
 
 CSRF_COOKIE_SECURE = True
 SESSION_COOKIE_SECURE = True
-SECURE_SSL_REDIRECT = True
+# SECURE_SSL_REDIRECT = True
 
 ALLOWED_HOSTS = [
     'hmbwebsite.herokuapp.com',
@@ -44,7 +44,7 @@ EMAIL_PORT = os.getenv('EMAIL_PORT')
 EMAIL_USE_TLS = os.getenv('EMAIL_USE_TLS')
 EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER')
 EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD')
-EMAIL_USE_SSL = os.getenv('EMAIL_USE_SSL')
+# EMAIL_USE_SSL = os.getenv('EMAIL_USE_SSL')
 
 
 # Application definition

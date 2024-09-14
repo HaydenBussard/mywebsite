@@ -34,18 +34,16 @@ def contact(request):
         name = request.POST.get('name')
         email = request.POST.get('email')
         message = request.POST.get('message')
-        
-        # Send email
-        send_mail(
-            f'New contact from {name}',
-            f'From: {email}\n\nMessage:\n{message}',
-            'contact@haydenbussard.com',
-            ['hayden@haydenbussard.com',
-             'haydenbussard@outlook.com'],
-            fail_silently=False,
-        )
-        
-        messages.success(request, 'Your message has been sent!')
+        try:
+            send_mail(
+                f'New contact from {name}',
+                f'From: {email}\n\nMessage:\n{message}',
+                'your_actual_website_email@yourdomain.com',
+                ['your_actual_personal_email@example.com'],
+                fail_silently=False,
+            )
+            messages.success(request, 'Your message has been sent!')
+        except Exception as e:
+            messages.error(request, f'An error occurred: {str(e)}')
         return redirect('contact')
-    
     return render(request, 'contact.html')

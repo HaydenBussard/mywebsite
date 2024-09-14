@@ -1,4 +1,6 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+from django.core.mail import send_mail
+from django.contrib import messages
 
 def home(request):
     return render(request, 'home.html')
@@ -11,9 +13,6 @@ def skills(request):
 
 def projects(request):
     return render(request, 'projects.html')
-
-def contact(request):
-    return render(request, 'contact.html')
 
 def lyme_disease(request):
     return render(request, 'lyme_disease.html')
@@ -29,3 +28,24 @@ def health_resources(request):
 
 def beyond_engineering(request):
     return render(request, 'beyond_engineering.html')
+
+def contact(request):
+    if request.method == 'POST':
+        name = request.POST.get('name')
+        email = request.POST.get('email')
+        message = request.POST.get('message')
+        
+        # Send email
+        send_mail(
+            f'New contact from {name}',
+            f'From: {email}\n\nMessage:\n{message}',
+            'contact@haydenbussard.com',
+            ['hayden@haydenbussard.com',
+             'haydenbussard@outlook.com'],
+            fail_silently=False,
+        )
+        
+        messages.success(request, 'Your message has been sent!')
+        return redirect('contact')
+    
+    return render(request, 'contact.html')

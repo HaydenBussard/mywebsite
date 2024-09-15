@@ -36,24 +36,44 @@ a:hover {
     border-color: #0056b3;
 }
 
-.navbar {
+.custom-navbar {
     padding: 10px 0;
 }
 
-.navbar-brand {
+.custom-navbar .navbar-brand {
     margin-left: 15px;
 }
 
-.navbar-toggler {
+.custom-navbar .navbar-toggler {
     margin-right: 15px;
 }
 
 @media (min-width: 992px) {
-    .navbar-nav {
+    .custom-navbar .navbar-nav {
         margin-left: auto;
     }
     
-    .nav-item {
+    .custom-navbar .nav-item {
         margin-right: 10px;
+    }
+}
+
+@media (max-width: 991px) {
+    .custom-navbar .navbar-nav {
+        padding-left: 15px;
+    }
+
+    .custom-navbar .navbar-brand,
+    .custom-navbar .navbar-nav .nav-link {
+        padding-left: 15px;
+    }
+
+    .custom-navbar .navbar-toggler {
+        margin-right: 15px;
+    }
+
+    .custom-navbar .navbar-nav .nav-item {
+        padding-left: 0;
+        margin-left: 0;
     }
 }

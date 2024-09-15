@@ -38,13 +38,14 @@ ALLOWED_HOSTS = [
 ]
 
 # Email
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_BACKEND = os.getenv('EMAIL_BACKEND')
 EMAIL_HOST = os.getenv('EMAIL_HOST')
-EMAIL_PORT = str(os.getenv('EMAIL_PORT'))
-# EMAIL_USE_TLS = str(os.getenv('EMAIL_USE_TLS')).islower()
+EMAIL_PORT = os.getenv('EMAIL_PORT')
+EMAIL_USE_TLS = os.getenv('EMAIL_USE_TLS')
 EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER')
 EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD')
-EMAIL_USE_SSL = os.getenv('EMAIL_USE_SSL')
+# EMAIL_USE_SSL = os.getenv('EMAIL_USE_SSL')
+
 
 
 # Application definition
@@ -56,7 +57,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'my_website', 
+    'my_website',
+    'widget_tweaks',
 ]
 
 MIDDLEWARE = [

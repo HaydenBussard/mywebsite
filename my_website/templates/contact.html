@@ -1,37 +1,43 @@
 {% extends 'base.html' %}
+{% load widget_tweaks %}
+{% load static %}
 
 {% block title %}Contact{% endblock %}
 
 {% block content %}
-<div class="container my-5">
+<link rel="stylesheet" href="{% static 'css/styles.css' %}">
+<div class="container my-5 contact-page">
     <h1 class="mb-4">Contact Me</h1>
     <div class="row">
-        <div class="col-md-6 mb-5">
-            <form method="POST" action="{% url 'contact' %}">
-                {% csrf_token %}            
-                <div class="mb-3">
-                    <label for="name" class="form-label">Name</label>
-                    <input type="text" class="form-control" id="name" required>
+        <div class="container">
+            <form method="POST" class="p-4 border rounded bg-light">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="{{ form.name.id_for_label }}">Name:</label>
+                    {% render_field form.name class="form-control" %}
                 </div>
-                <div class="mb-3">
-                    <label for="email" class="form-label">Email</label>
-                    <input type="email" class="form-control" id="email" required>
+                <div class="form-group">
+                    <label for="{{ form.email.id_for_label }}">Email:</label>
+                    {% render_field form.email class="form-control" %}
                 </div>
-                <div class="mb-3">
-                    <label for="message" class="form-label">Message</label>
-                    <textarea class="form-control" id="message" rows="5" required></textarea>
+                <div class="form-group">
+                    <label for="{{ form.message.id_for_label }}">Message:</label>
+                    {% render_field form.message class="form-control" %}
                 </div>
-                <button type="submit" class="btn btn-primary mb-4">Send Message</button>
+                <button type="submit" class="btn btn-primary">Send</button>
             </form>
         </div>
-        <div class="col-md-6">
-            <h3 class="mt-4 mt-md-0">Get in Touch</h3>
-            <p>I'd love to hear from you! Whether you have a question about my work, want to discuss a potential opportunity, or just want to say hello, feel free to reach out.</p>
+        </div>
+        <div class="contact-info text-center mt-5">
+            <h2>Get in Touch</h2>
+            <p class="mb-4">
+                I'd love to hear from you! Whether you have a question about my work, want to discuss a potential opportunity, or just want to say hello, feel free to reach out.
+            </p>
             <ul class="list-unstyled">
-                <li class="mb-2"><i class="bi bi-telephone-fill me-2"></i> Phone: <a href="tel:+14127227076">412-722-7076</a> (<a href="sms:+14127227076">Text</a>)</li>
-                <li class="mb-2"><i class="bi bi-envelope-fill me-2"></i> Email: <a href="mailto:haydenbussard@outlook.com">haydenbussard@outlook.com</a></li>
-                <li class="mb-2"><i class="bi bi-linkedin me-2"></i> LinkedIn: <a href="https://www.linkedin.com/in/haydenbussard">linkedin.com/in/haydenbussard</a></li>
-                <li class="mb-2"><i class="bi bi-github me-2"></i> GitHub: <a href="https://github.com/HaydenBussard">github.com/HaydenBussard</a></li>
+                <li><i class="bi bi-telephone-fill me-2"></i> Phone: <a href="tel:+14127227076">412-722-7076</a> (<a href="sms:+14127227076">Text</a>)</li>
+                <li><i class="bi bi-envelope-fill me-2"></i> Email: <a href="mailto:haydenbussard@outlook.com">haydenbussard@outlook.com</a></li>
+                <li><i class="bi bi-linkedin me-2"></i> LinkedIn: <a href="https://www.linkedin.com/in/haydenbussard">linkedin.com/in/haydenbussard</a></li>
+                <li><i class="bi bi-github me-2"></i> GitHub: <a href="https://github.com/HaydenBussard">github.com/HaydenBussard</a></li>
             </ul>
         </div>
     </div>

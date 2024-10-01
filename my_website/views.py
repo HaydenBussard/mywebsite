@@ -48,6 +48,7 @@ class ContactForm(forms.Form):
         return cleaned_data
 
 def contact(request):
+    messages.get_messages(request).used = True
     if request.method == 'POST':
         form = ContactForm(request.POST)
         print(f"Form is valid: {form.is_valid()}")

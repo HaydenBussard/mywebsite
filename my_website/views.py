@@ -5,6 +5,8 @@ from django import forms
 from captcha.widgets import ReCaptchaV3
 from captcha.fields import ReCaptchaField
 from captcha.widgets import ReCaptchaV3
+import requests
+from django.conf import settings
 
 def home(request):
     return render(request, 'home.html')
@@ -48,40 +50,50 @@ class ContactForm(forms.Form):
         return cleaned_data
 
 def contact(request):
-    messages.get_messages(request).used = True
     if request.method == 'POST':
         form = ContactForm(request.POST)
-        print(f"Form is valid: {form.is_valid()}")
-        print(f"Form errors: {form.errors}")
         if form.is_valid():
-            name = form.cleaned_data['name']
-            email = form.cleaned_data['email']
-            message = form.cleaned_data['message']
-            try:
-                # Send email to you
-                send_mail(
-                    f'New contact from {name}',
-                    f'From: {email}\n\nMessage:\n{message}',
-                    'contact@haydenbussard.com',
-                    ['hayden@haydenbussard.com', 'haydenbussard@outlook.com'],
-                    fail_silently=False,
-                )
-                
-                # Send automated response to the user
-                send_mail(
-                    'Thank You for Contacting Me!',
-                    f'Dear {name},\n\nThank you for reaching out! I have received your message and will get back to you as soon as possible.\n\nBest regards,\nHayden Bussard',
-                    'contact@haydenbussard.com',
-                    [email],
-                    fail_silently=False,
-                )
+            # Verify reCAPTCHA
+            recaptcha_response = request.POST.get('g-recaptcha-response')
+            data = {
+                'secret': settings.RECAPTCHA_PRIVATE_KEY,
+                'response': recaptcha_response
+            }
+            response = requests.post('https://www.google.com/recaptcha/api/siteverify', data=data)
+            result = response.json()
 
-                messages.success(request, 'Your message has been sent!')
-            except Exception as e:
-                messages.error(request, f'An error occurred: {str(e)}')
-            return redirect('contact')
-        else:
-            messages.error(request, 'There was an error with your submission. Please try again.')
+            if result['success']:
+                name = form.cleaned_data['name']
+                email = form.cleaned_data['email']
+                message = form.cleaned_data['message']
+                
+                try:
+                    # Send email to you
+                    send_mail(
+                        f'New contact from {name}',
+                        f'From: {email}\n\nMessage:\n{message}',
+                        'contact@haydenbussard.com',
+                        ['hayden@haydenbussard.com', 'haydenbussard@outlook.com'],
+                        fail_silently=False,
+                    )
+                    
+                    # Send automated response to the user
+                    send_mail(
+                        'Thank You for Contacting Me!',
+                        f'Dear {name},\n\nThank you for reaching out! I have received your message and will get back to you as soon as possible.\n\nBest regards,\nHayden Bussard',
+                        'contact@haydenbussard.com',
+                        [email],
+                        fail_silently=False,
+                    )
+
+                    messages.success(request, 'Your message has been sent!')
+                except Exception as e:
+                    messages.error(request, f'An error occurred: {str(e)}')
+                
+                return redirect('contact')
+            else:
+                messages.error(request, 'Invalid reCAPTCHA. Please try again.')
     else:
         form = ContactForm()
+    
     return render(request, 'contact.html', {'form': form})

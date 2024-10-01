@@ -34,6 +34,14 @@ class ContactForm(forms.Form):
     name = forms.CharField(max_length=100)
     email = forms.EmailField()
     message = forms.CharField(widget=forms.Textarea)
+    honeypot = forms.CharField(required=False, widget=forms.HiddenInput())
+
+    def clean(self):
+        cleaned_data = super().clean()
+        honeypot = cleaned_data.get('honeypot')
+        if honeypot:
+            raise forms.ValidationError('Spam detected')
+        return cleaned_data
 
 def contact(request):
     if request.method == 'POST':

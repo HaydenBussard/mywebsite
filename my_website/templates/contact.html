@@ -24,6 +24,7 @@
                     <label for="{{ form.message.id_for_label }}">Message:</label>
                     {% render_field form.message class="form-control" %}
                 </div>
+                {% render_field form.honeypot class="honeypot-field" %}
                 <button type="submit" class="btn btn-primary">Send</button>
             </form>
         </div>

@@ -85,3 +85,7 @@
         padding: 15px;
     }
 }
+
+.honeypot-field {
+    display: none;
+}

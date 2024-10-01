@@ -26,11 +26,14 @@
                     {% render_field form.message class="form-control" %}
                 </div>
                 {% render_field form.honeypot class="honeypot-field" %}
-                {% render_field form.captcha %}
+                
+                <!-- Add reCAPTCHA field here -->
+                <div class="g-recaptcha" data-sitekey="{{ RECAPTCHA_PUBLIC_KEY }}"></div>
+
                 <button type="submit" class="btn btn-primary">Send</button>
             </form>
         </div>
-        </div>
+    </div>
         <div class="contact-info text-center mt-5">
             <h2>Get in Touch</h2>
             <p class="mb-4">

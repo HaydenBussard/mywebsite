@@ -13,3 +13,4 @@ python-dotenv
 django-widget-tweaks
 git+https://github.com/dmpayton/django-admin-honeypot.git
 django-recaptcha==3.0.0
+requests==2.26.0

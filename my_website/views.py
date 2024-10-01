@@ -2,6 +2,9 @@ from django.shortcuts import render, redirect
 from django.core.mail import send_mail
 from django.contrib import messages
 from django import forms
+from captcha.widgets import ReCaptchaV3
+from captcha.fields import ReCaptchaField
+from captcha.widgets import ReCaptchaV3
 
 def home(request):
     return render(request, 'home.html')
@@ -35,6 +38,7 @@ class ContactForm(forms.Form):
     email = forms.EmailField()
     message = forms.CharField(widget=forms.Textarea)
     honeypot = forms.CharField(required=False, widget=forms.HiddenInput())
+    captcha = ReCaptchaField(widget=ReCaptchaV3)
 
     def clean(self):
         cleaned_data = super().clean()
@@ -73,6 +77,8 @@ def contact(request):
             except Exception as e:
                 messages.error(request, f'An error occurred: {str(e)}')
             return redirect('contact')
+        else:
+            messages.error(request, 'There was an error with your submission. Please try again.')
     else:
         form = ContactForm()
     return render(request, 'contact.html', {'form': form})

@@ -12,3 +12,4 @@ whitenoise==6.7.0
 python-dotenv
 django-widget-tweaks
 git+https://github.com/dmpayton/django-admin-honeypot.git
+django-recaptcha==3.0.0

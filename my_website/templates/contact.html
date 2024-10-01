@@ -11,24 +11,46 @@
     <h1 class="mb-4">Contact Me</h1>
     <div class="row">
         <div class="container">
+            {% if messages %}
+            <div class="messages">
+                {% for message in messages %}
+                <div class="alert alert-{{ message.tags }}">{{ message }}</div>
+                {% endfor %}
+            </div>
+            {% endif %}
+
+            {% if form.errors %}
+            <div class="alert alert-danger">
+                Please correct the errors below.
+            </div>
+            {% endif %}
+
             <form method="POST" class="p-4 border rounded bg-light">
                 {% csrf_token %}
                 <div class="form-group">
                     <label for="{{ form.name.id_for_label }}">Name:</label>
                     {% render_field form.name class="form-control" %}
+                    {% if form.name.errors %}
+                    <div class="text-danger">{{ form.name.errors }}</div>
+                    {% endif %}
                 </div>
                 <div class="form-group">
                     <label for="{{ form.email.id_for_label }}">Email:</label>
                     {% render_field form.email class="form-control" %}
+                    {% if form.email.errors %}
+                    <div class="text-danger">{{ form.email.errors }}</div>
+                    {% endif %}
                 </div>
                 <div class="form-group">
                     <label for="{{ form.message.id_for_label }}">Message:</label>
                     {% render_field form.message class="form-control" %}
+                    {% if form.message.errors %}
+                    <div class="text-danger">{{ form.message.errors }}</div>
+                    {% endif %}
                 </div>
                 {% render_field form.honeypot class="honeypot-field" %}
                 
-                <!-- Add reCAPTCHA field here -->
-                <div class="g-recaptcha" data-sitekey="{{ RECAPTCHA_PUBLIC_KEY }}"></div>
+                {% render_field form.captcha %}
 
                 <button type="submit" class="btn btn-primary">Send</button>
             </form>

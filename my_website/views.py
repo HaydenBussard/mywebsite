@@ -50,6 +50,8 @@ class ContactForm(forms.Form):
 def contact(request):
     if request.method == 'POST':
         form = ContactForm(request.POST)
+        print(f"Form is valid: {form.is_valid()}")
+        print(f"Form errors: {form.errors}")
         if form.is_valid():
             name = form.cleaned_data['name']
             email = form.cleaned_data['email']

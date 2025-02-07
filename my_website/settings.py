@@ -15,6 +15,7 @@ import os
 from dotenv import load_dotenv
 import dj_database_url
 
+boo_deploy = True
 
 # Load environment variables from .env file
 load_dotenv()
@@ -24,8 +25,20 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = os.getenv('SECRET_KEY')
 
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.getenv('DEBUG') == 'True'
+if boo_deploy:
+    ALLOWED_HOSTS = [
+        'hmbwebsite.herokuapp.com',
+        'www.haydenbussard.com',
+        'haydenbussard.com',
+    ]
+    DEBUG = os.getenv('DEBUG') == 'True'
+else:
+    ALLOWED_HOSTS = [
+        'hmbwebsite.herokuapp.com',
+        'www.haydenbussard.com',
+        'haydenbussard.com',
+    ] + os.getenv('MORE_ALLOWED_HOSTS', '').split(',')
+    DEBUG = os.getenv('DEBUG_DEV') == 'True'
 
 
 
@@ -101,12 +114,39 @@ WSGI_APPLICATION = 'my_website.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+if boo_deploy:
+
+    # Force HTTPS
+    SECURE_SSL_REDIRECT = True 
+    # Set secure cookies
+    SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+    SECURE_SSL_REDIRECT = True
+    SESSION_COOKIE_SECURE = True
+    CSRF_COOKIE_SECURE = True
+    SECURE_HSTS_SECONDS = 31536000
+    SECURE_HSTS_INCLUDE_SUBDOMAINS = True
+    SECURE_HSTS_PRELOAD = True
+
+    # Other security settings
+    SECURE_CONTENT_TYPE_NOSNIFF = True
+    SECURE_BROWSER_XSS_FILTER = True
+    X_FRAME_OPTIONS = 'DENY'
+
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': BASE_DIR / 'db.sqlite3',
+        }
     }
-}
+else:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': BASE_DIR / 'db.sqlite3',
+        }
+    }
+
+
 
 
 # Password validation
@@ -159,19 +199,3 @@ import django_heroku
 django_heroku.settings(locals())
 
 
-# Force HTTPS 
-SECURE_SSL_REDIRECT = True
-
-# Set secure cookies
-SESSION_COOKIE_SECURE = True
-CSRF_COOKIE_SECURE = True
-
-# HSTS settings
-SECURE_HSTS_SECONDS = 31536000 # 1 year
-SECURE_HSTS_INCLUDE_SUBDOMAINS = True
-SECURE_HSTS_PRELOAD = True
-
-# Other security settings
-SECURE_CONTENT_TYPE_NOSNIFF = True
-SECURE_BROWSER_XSS_FILTER = True
-X_FRAME_OPTIONS = 'DENY'

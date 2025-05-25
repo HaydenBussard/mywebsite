@@ -1,33 +1,42 @@
 {% extends 'base.html' %}
 {% load static %}
 
-{% block title %}Professional Profile{% endblock %}
+{% block title %}{{ page.title }}{% endblock %}
 
 {% block content %}
 <div class="container my-5">
     <div class="row">
         <div class="col-md-8 offset-md-2">
-            <h1 class="mb-4">Professional Profile</h1>
+            <h1 class="mb-4">{{ page.title }}</h1>
             
+            {% if page.headshot %}
             <div class="text-center mb-4">
-                <img src="{% static 'images/headshot.JPG' %}" alt="Hayden Bussard" class="rounded-circle img-fluid" style="max-width: 200px;">
+                <img src="{{ page.headshot.url }}" alt="Headshot" class="rounded-circle img-fluid" style="max-width: 200px;">
             </div>
+            {% endif %}
             
-            <p class="lead">Here you'll find my resume and more skills that I haven't had the opportunity to utilize in my past experience.
-            </p>
+            {% if page.intro_text %}
+            <p class="lead">{{ page.intro_text|linebreaks }}</p>
+            {% endif %}
 
             <!-- Resume Download and Preview -->
             <div class="my-4">
-                <h2>My Resume</h2>
-                <a href="{% static 'documents/Hayden_Bussard_Resume.pdf' %}" class="btn btn-primary" download>Download Resume</a>
-                <a href="{% static 'documents/Hayden_Bussard_Resume.pdf' %}" class="btn btn-secondary" target="_blank">View Resume</a>
-            </div>
-
-            <!-- Google Docs Viewer -->
-            <div>
-                <h3>Resume Preview</h3>
-                <iframe src="https://docs.google.com/viewer?url=https://www.haydenbussard.com{% static 'documents/Hayden_Bussard_Resume.pdf' %}&embedded=true" width="100%" height="600px" style="border: none;"></iframe>
-                <p>If the preview doesn't load, you can <a href="{% static 'documents/Hayden_Bussard_Resume.pdf' %}" download>download the PDF here</a>.</p>
+                <h2>{{ page.my_resume_header }}</h2>
+                {% for resume in resumes %}
+                    <div class="mb-2">
+                        <a href="{{ resume.file.url }}" class="btn btn-primary" download>
+                            Download {{ resume.title }} ({{ resume.file_extension }})
+                        </a>
+                        {% if resume.file_extension == "PDF" %}
+                            <a href="{{ resume.file.url }}" class="btn btn-secondary" target="_blank">
+                                View {{ resume.title }} (PDF)
+                            </a>
+                        {% endif %}
+                        {% if resume.description %}
+                            <p class="small text-muted">{{ resume.description }}</p>
+                        {% endif %}
+                    </div>
+                {% endfor %}
             </div>
 
             <!-- Menu for Skills and Extras -->
@@ -44,10 +53,12 @@
             </div>
 
             <!-- Brief overview -->
+            {% if page.at_a_glance %}
             <div class="my-4">
                 <h2>At a Glance</h2>
-                <p>As an engineer with a passion for innovation, I bring a unique blend of technical expertise and creative problem-solving to every project.</p>
+                <p>{{ page.at_a_glance|linebreaks }}</p>
             </div>
+            {% endif %}
         </div>
     </div>
 </div>

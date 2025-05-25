@@ -42,11 +42,11 @@ else:
 
 
 
-ALLOWED_HOSTS = [
-    'hmbwebsite.herokuapp.com',
-    os.environ.get('ALLOWED_HOST', 'www.haydenbussard.com'),
-    'haydenbussard.com'
-]
+# ALLOWED_HOSTS = [
+#     'hmbwebsite.herokuapp.com',
+#     os.environ.get('ALLOWED_HOST', 'www.haydenbussard.com'),
+#     'haydenbussard.com'
+# ]
 
 # Email
 EMAIL_BACKEND = os.getenv('EMAIL_BACKEND')
@@ -115,7 +115,8 @@ WSGI_APPLICATION = 'my_website.wsgi.application'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
 if boo_deploy:
-
+    import django_heroku
+    django_heroku.settings(locals())
     # Force HTTPS
     SECURE_SSL_REDIRECT = True 
     # Set secure cookies
@@ -139,6 +140,16 @@ if boo_deploy:
         }
     }
 else:
+    SECURE_SSL_REDIRECT = False
+    SECURE_PROXY_SSL_HEADER = None
+    SESSION_COOKIE_SECURE = False
+    CSRF_COOKIE_SECURE = False
+    SECURE_HSTS_SECONDS = 0
+    SECURE_HSTS_INCLUDE_SUBDOMAINS = False
+    SECURE_HSTS_PRELOAD = False
+    SECURE_CONTENT_TYPE_NOSNIFF = False
+    SECURE_BROWSER_XSS_FILTER = False
+    X_FRAME_OPTIONS = 'SAMEORIGIN'
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.sqlite3',
@@ -188,6 +199,9 @@ STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
+MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR / 'media'
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
@@ -195,7 +209,6 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 ### Configuring for Heroku
 
-import django_heroku
-django_heroku.settings(locals())
+
 
 

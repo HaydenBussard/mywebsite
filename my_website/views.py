@@ -6,12 +6,25 @@ from captcha.widgets import ReCaptchaV3
 from captcha.fields import ReCaptchaField
 import requests
 from django.conf import settings
+from django.shortcuts import render
+from .models import PortfolioPage, ResumeVersion
 
 def home(request):
     return render(request, 'home.html')
 
+# def about(request):
+#     return render(request, 'about_me.html')
+
 def about(request):
-    return render(request, 'about_me.html')
+    page = PortfolioPage.objects.first()
+    resumes = ResumeVersion.objects.all()
+    # Add absolute URLs for all resumes
+    for resume in resumes:
+        resume.absolute_url = request.build_absolute_uri(resume.file.url)
+    return render(request, 'about_me.html', {
+        'page': page,
+        'resumes': resumes,
+    })
 
 def skills(request):
     return render(request, 'skills.html')

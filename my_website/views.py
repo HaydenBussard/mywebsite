@@ -7,10 +7,13 @@ from captcha.fields import ReCaptchaField
 import requests
 from django.conf import settings
 from django.shortcuts import render
-from .models import PortfolioPage, ResumeVersion
+from .models import PortfolioPage, ResumeVersion, HomePage
 
 def home(request):
-    return render(request, 'home.html')
+    page = HomePage.objects.first()
+    return render(request, 'home.html', {
+        'page': page
+    })
 
 # def about(request):
 #     return render(request, 'about_me.html')

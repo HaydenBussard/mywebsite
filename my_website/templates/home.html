@@ -1,26 +1,29 @@
 {% extends 'base.html' %}
 {% load static %}
 
-{% block title %}Hayden Bussard{% endblock %}
+{% block title %}{{ page.title|default:"Hayden Bussard" }}{% endblock %}
 
 {% block content %}
 <div class="container my-5">
     <div class="row">
         <div class="col-md-8 offset-md-2 text-center">
-            <!-- <h1 class="mb-4">KEEPING THIS HERE TO EVENTUALLY RECONSIDER HAVING A H1 OVER IMAGE</h1> -->
             
             <div class="mb-4">
+                {% if page.headshot %}
+                <img src="{{ page.headshot.url }}" alt="Hayden Bussard" class="rounded-circle img-fluid" style="max-width: 200px;">
+                {% else %}
                 <img src="{% static 'images/headshot.JPG' %}" alt="Hayden Bussard" class="rounded-circle img-fluid" style="max-width: 200px;">
+                {% endif %}
             </div>
             
-            <p class="lead mb-5">Welcome to my personal website!</p>
+            <p class="lead mb-5">{{ page.lead_paragraph|default:"Welcome to my personal website!" }}</p>
 
             <div class="d-flex justify-content-center mb-5">
                 <div class="col-md-6">
                     <div class="card h-100">
                         <div class="card-body">
-                            <h2 class="card-title">Professional Profile</h2>
-                            <p class="card-text">Learn about my background and explore my professional experiences.</p>
+                            <h2 class="card-title">{{ page.card_title_professional|default:"Professional Profile" }}</h2>
+                            <p class="card-text">{{ page.card_text_professional|default:"Learn about my background and explore my professional experiences." }}</p>
                             <a href="{% url 'about' %}" class="btn btn-primary">View My Portfolio</a>
                         </div>
                     </div>
@@ -38,13 +41,21 @@
             
             <div class="mt-5 text-muted">
                 <p>
-                    This website was developed using Django (a Python web framework), Bootstrap for responsive design, and it's hosted on Heroku, allowing for easy scaling and management.
+                    {{ page.footer_text|linebreaks|default:"This website was developed using Django (a Python web framework), Bootstrap for responsive design, and it's hosted on Heroku, allowing for easy scaling and management." }}
                 </p>
+                
                 <p class="small mt-2">
-                    To learn more about how this site was built, click <a href="{% url 'website_info' %}">here</a>.
+                    {% if page.website_info_link_text %}
+                        {{ page.website_info_link_text|default:"To learn more about how this site was built, click" }} 
+                        <a href="{% url 'website_info' %}">here</a>.
+                    {% else %}
+                        To learn more about how this site was built, click <a href="{% url 'website_info' %}">here</a>.
+                    {% endif %}
                 </p>
             </div>
         </div>
     </div>
 </div>
 {% endblock %}
+
+

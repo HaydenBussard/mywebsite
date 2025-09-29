@@ -176,3 +176,102 @@ class SkillsPageContent(models.Model):
 
     def delete(self, *args, **kwargs):
         pass # Prevent deletion
+
+class BeyondWorkPageContent(models.Model):
+    """
+    A singleton model to hold the customizable content for the Beyond Work page.
+    """
+    main_header = models.CharField(
+        max_length=200,
+        default="Beyond Work: Who I Am",
+        blank=True,
+        null=True,
+        help_text="The main H1 heading for the page. Leave blank to display no main header."
+    )
+    
+    # The title for the browser tab
+    browser_title = models.CharField(
+        max_length=100,
+        default="Beyond Work",
+        help_text="The title that appears in the browser tab."
+    )
+
+    class Meta:
+        verbose_name = "Beyond Work Page Content (Singleton)"
+        verbose_name_plural = "Beyond Work Page Content (Singleton)"
+
+    def __str__(self):
+        return "Beyond Work Page Content"
+
+    # Enforce the singleton pattern
+    def save(self, *args, **kwargs):
+        self.pk = 1
+        super(BeyondWorkPageContent, self).save(*args, **kwargs)
+
+    def delete(self, *args, **kwargs):
+        pass # Prevent deletion
+
+# --- New Models for Dynamic Sections and Lists ---
+
+class BeyondWorkSection(models.Model):
+    """
+    Represents a major content section (the H2 headings) on the page.
+    """
+    title = models.CharField(
+        max_length=100,
+        help_text="The heading for this section (e.g., 'Lifelong Learner', 'Very Active')."
+    )
+    intro_paragraph = models.TextField(
+        blank=True,
+        null=True,
+        help_text="The main paragraph text that appears immediately under the section title."
+    )
+    order = models.IntegerField(
+        default=0,
+        help_text="The order in which sections should appear (lower number means earlier)."
+    )
+
+    class Meta:
+        verbose_name = "Beyond Work Section"
+        verbose_name_plural = "Beyond Work Sections"
+        ordering = ['order', 'title']
+
+    def __str__(self):
+        return self.title
+
+class SectionDetail(models.Model):
+    """
+    Represents individual content details: either a list item or an extra paragraph.
+    """
+    DETAIL_TYPE_CHOICES = [
+        ('LI', 'List Item (Bullet Point)'),
+        ('P', 'Paragraph'),
+    ]
+
+    section = models.ForeignKey(
+        BeyondWorkSection,
+        on_delete=models.CASCADE,
+        related_name='details',
+        help_text="The section this detail belongs to."
+    )
+    content = models.TextField(
+        help_text="The text content for this detail."
+    )
+    detail_type = models.CharField(
+        max_length=2,
+        choices=DETAIL_TYPE_CHOICES,
+        default='LI',
+        help_text="Select 'List Item' for a bullet point, or 'Paragraph' for extra text."
+    )
+    order = models.IntegerField(
+        default=0,
+        help_text="The order in which details should appear within their section."
+    )
+
+    class Meta:
+        verbose_name = "Section Detail"
+        verbose_name_plural = "Section Details"
+        ordering = ['order']
+
+    def __str__(self):
+        return f"[{self.detail_type}] {self.content[:50]}..."

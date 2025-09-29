@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import PortfolioPage, ResumeVersion, HomePage, Skill, SkillCategory, SkillsPageContent
+from .models import PortfolioPage, ResumeVersion, HomePage, Skill, SkillCategory, SkillsPageContent, BeyondWorkPageContent, BeyondWorkSection, SectionDetail
 
 @admin.register(PortfolioPage)
 class PortfolioPageAdmin(admin.ModelAdmin):
@@ -53,6 +53,32 @@ class SkillsPageContentAdmin(admin.ModelAdmin):
     def has_add_permission(self, request):
         # Allow adding if the object doesn't exist, otherwise prevent it.
         if SkillsPageContent.objects.exists():
+            return False
+        return True
+    
+    def has_delete_permission(self, request, obj=None):
+        return False
+
+class SectionDetailInline(admin.TabularInline):
+    """Allows adding/editing section details directly on the BeyondWorkSection admin page."""
+    model = SectionDetail
+    extra = 1
+    fields = ('content', 'detail_type', 'order',)
+
+@admin.register(BeyondWorkSection)
+class BeyondWorkSectionAdmin(admin.ModelAdmin):
+    list_display = ('title', 'order', 'intro_paragraph',)
+    search_fields = ('title', 'intro_paragraph',)
+    inlines = [SectionDetailInline]
+    ordering = ('order',)
+
+@admin.register(BeyondWorkPageContent)
+class BeyondWorkPageContentAdmin(admin.ModelAdmin):
+    list_display = ('main_header', 'browser_title',)
+    fields = ('browser_title', 'main_header',)
+
+    def has_add_permission(self, request):
+        if BeyondWorkPageContent.objects.exists():
             return False
         return True
     

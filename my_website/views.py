@@ -7,7 +7,7 @@ from captcha.fields import ReCaptchaField
 import requests
 from django.conf import settings
 from django.shortcuts import render
-from .models import PortfolioPage, ResumeVersion, HomePage, SkillCategory, SkillsPageContent
+from .models import PortfolioPage, ResumeVersion, HomePage, SkillCategory, SkillsPageContent, BeyondWorkSection, BeyondWorkPageContent
 
 def home(request):
     page = HomePage.objects.first()
@@ -57,8 +57,18 @@ def website_info(request):
 def health_resources(request):
     return render(request, 'health_resources.html')
 
-def beyond_engineering(request):
-    return render(request, 'beyond_engineering.html')
+def beyond_engineering(request): # Assuming this is your view function name based on your 'about_me.html'
+    # 1. Fetch the singleton page content
+    page_content, created = BeyondWorkPageContent.objects.get_or_create(pk=1)
+    
+    # 2. Retrieve all sections, prefetching details for efficiency
+    sections = BeyondWorkSection.objects.all().prefetch_related('details')
+
+    context = {
+        'page': page_content,
+        'sections': sections,
+    }
+    return render(request, 'beyond_engineering.html', context)
 
 class ContactForm(forms.Form):
     name = forms.CharField(max_length=100)

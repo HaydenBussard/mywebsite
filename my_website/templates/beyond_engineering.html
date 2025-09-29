@@ -1,67 +1,51 @@
 {% extends 'base.html' %}
 {% load static %}
 
-{% block title %}Beyond Work{% endblock %}
+{% block title %}{{ page.browser_title }}{% endblock %}
 
 {% block content %}
 <div class="container my-5">
-    <h1 class="mb-4">Beyond Work: Who I Am</h1>
+    
+    {% if page.main_header %}
+    <h1 class="mb-4">{{ page.main_header }}</h1>
+    {% endif %}
 
-    <section class="mb-5">
-        <h2>Lifelong Learner</h2>
-        <p>I am addicted to learning. Off the top, these are some subjects & skills I'm frequently focused on:</p>
-        <ul>
-            <li>foreign languages (Portuguese)</li>
-            <li>stock market</li>
-            <li>programming</li>
-            <li>website development</li>
-        </ul>
-        <p>My love for learning translates directly into my professional life:</p>
-        <ul>
-            <li>Eagerly taking on the off-normal and challenging projects at work</li>
-            <li>Adapting quickly and comfortably to unfamiliar tasks</li>
-        </ul>
-    </section>
+    {% for section in sections %}
+        <section class="mb-5">
+            <h2>{{ section.title }}</h2>
+            
+            {% if section.intro_paragraph %}
+            <p>{{ section.intro_paragraph|linebreaksbr }}</p>
+            {% endif %}
+            
+            {% with details=section.details.all %}
+                {% for detail in details %}
+                    {% if detail.detail_type == 'LI' %}
+                        
+                        {# Safely extract the previous item. details|slice:forloop.counter0|last returns the element before the current one #}
+                        {% with previous_item=details|slice:forloop.counter0|last %}
+                            {# Start <ul> if this is the first item OR the previous item is not an LI (or doesn't exist) #}
+                            {% if forloop.first or previous_item.detail_type != 'LI' %}
+                                <ul>
+                            {% endif %}
+                        {% endwith %}
+                        
+                        <li>{{ detail.content }}</li>
 
-    <section class="mb-5">
-        <h2>Very Active</h2>
-        <p>Staying still is impossible - here are some of the ways I keep active.</p>
-        <ul>
-            <li>Weight training</li>
-            <li>Golf/ Pickleball/ Basketball</li>
-            <li>Yoga</li>
-            <li>Walking my good boy (his name's Leo)</li>
-        </ul>
-    </section>
-
-    <section class="mb-5">
-        <h2>Big Sports Guy</h2>
-        <p>Here are some of my favorite sports to follow:</p>
-        <ul>
-            <li>Football</li>
-            <li>Golf</li>
-            <li>Lacrosse</li>
-            <li>Soccer</li>
-        </ul>
-    </section>
-
-    <section class="mb-5">
-        <h2>Aspiring Traveler</h2>
-        <p>Took 1 overseas work trip in 2020 and immediately began making a list of all the other countries I need to see. Here are the one's I've been to so far:</p>
-        <ul>
-            <li>Canada</li>
-            <li>Mexico</li>
-            <li>Slovenia</li>
-            <li>Italy</li>
-            <li>Croatia</li>
-            <li>Portugal</li>
-        </ul>
-        <p>...3 of these happened in that 1 work trip. While I dream of constantly traveling, I unfortunately do not.</p>
-    </section>
-
-    <section>
-        <h2>Personal Philosophy</h2>
-        <p>I believe in continuous self-improvement and embracing new challenges.</p>
-    </section>
+                        {# Safely extract the next item. details|slice:forloop.counter|first returns the element after the current one #}
+                        {% with next_item=details|slice:forloop.counter|first %}
+                            {# End </ul> if this is the last item OR the next item is not an LI #}
+                            {% if forloop.last or next_item.detail_type != 'LI' %}
+                                </ul>
+                            {% endif %}
+                        {% endwith %}
+                        
+                    {% elif detail.detail_type == 'P' %}
+                        <p>{{ detail.content|linebreaksbr }}</p>
+                    {% endif %}
+                {% endfor %}
+            {% endwith %}
+        </section>
+    {% endfor %}
 </div>
 {% endblock %}

@@ -7,7 +7,7 @@ from captcha.fields import ReCaptchaField
 import requests
 from django.conf import settings
 from django.shortcuts import render
-from .models import PortfolioPage, ResumeVersion, HomePage
+from .models import PortfolioPage, ResumeVersion, HomePage, SkillCategory, SkillsPageContent
 
 def home(request):
     page = HomePage.objects.first()
@@ -30,7 +30,17 @@ def about(request):
     })
 
 def skills(request):
-    return render(request, 'skills.html')
+    # 1. Fetch the singleton page content (or create it if it doesn't exist)
+    page_content, created = SkillsPageContent.objects.get_or_create(pk=1)
+    
+    # 2. Retrieve all skill categories
+    skill_categories = SkillCategory.objects.all().prefetch_related('skills')
+
+    context = {
+        'page': page_content, # Pass the content object to the template
+        'skill_categories': skill_categories,
+    }
+    return render(request, 'skills.html', context)
 
 def projects(request):
     return render(request, 'projects.html')

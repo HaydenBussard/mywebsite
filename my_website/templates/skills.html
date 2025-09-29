@@ -5,62 +5,35 @@
 
 {% block content %}
 <div class="container my-5">
-    <h1 class="mb-4">My Skills</h1>
+    
+    {% if page.main_header %}
+    <h1 class="mb-4">{{ page.main_header }}</h1>
+    {% endif %}
+
+    {% if page.intro_text %}
+    <p class="lead">{{ page.intro_text|linebreaks }}</p>
+    {% endif %}
 
     <div class="row">
-        <div class="col-md-6 mb-4">
-            <h2>Technical Skills</h2>
-            <ul class="list-group">
-                <li class="list-group-item">Technical Problem Solving</li>
-                <li class="list-group-item">Data Analytics</li>
-                <li class="list-group-item">Project Management</li>
-                <li class="list-group-item">Requirements Analysis</li>
-                <li class="list-group-item">Technical Communication</li>
-            </ul>
-        </div>
-        <div class="col-md-6 mb-4">
-            <h2>Soft Skills</h2>
-            <ul class="list-group">
-                <li class="list-group-item">Leadership</li>
-                <li class="list-group-item">Time Management</li>
-                <li class="list-group-item">Customer/Vendor Relationships</li>
-                <li class="list-group-item">Cross-Functional Collaboration</li>
-                <li class="list-group-item">Adaptability</li>
-                <li class="list-group-item">Positive Mental Attitude</li>
-            </ul>
-        </div>
+        {% for category in skill_categories %}
+            <div class="col-md-6 mb-4">
+                <h2>{{ category.title }}</h2>
+                <ul class="list-group">
+                    {% for skill in category.skills.all %}
+                        <li class="list-group-item">
+                            {{ skill.name }}
+                            {% if skill.note %}
+                                <small class="text-muted">({{ skill.note }})</small>
+                            {% endif %}
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+            {% if forloop.counter|divisibleby:2 and not forloop.last %}
+                </div><div class="row">
+            {% endif %}
+        {% endfor %}
     </div>
 
-    <div class="row">
-        <div class="col-md-6 mb-4">
-            <h2>Business Skills</h2>
-            <ul class="list-group">
-                <li class="list-group-item">New Business Development</li>
-                <li class="list-group-item">Budgeting & Forecasting</li>
-                <li class="list-group-item">Industry Insight</li>
-            </ul>
-        </div>
-        <div class="col-md-6 mb-4">
-            <h2>Technical Proficiencies</h2>
-            <ul class="list-group">
-                <li class="list-group-item">MS Office</li>
-                <li class="list-group-item">Python</li>
-                <li class="list-group-item">SQL</li>
-                <li class="list-group-item">PowerBI</li>
-                <li class="list-group-item">SAP</li>
-                <li class="list-group-item">Autodesk Inventor</li>
-                <li class="list-group-item">SolidWorks</li>
-            </ul>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-6 mb-4">
-            <h2>Other</h2>
-            <ul class="list-group">
-                <li class="list-group-item">Certified Personal Trainer (I have not renewed that certificate)</li>
-                <li class="list-group-item">Portuguese (high-level comprehension, average speaking)</li>
-            </ul>
-        </div>
-    </div>
 </div>
 {% endblock %}

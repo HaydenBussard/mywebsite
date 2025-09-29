@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import PortfolioPage, ResumeVersion, HomePage
+from .models import PortfolioPage, ResumeVersion, HomePage, Skill, SkillCategory, SkillsPageContent
 
 @admin.register(PortfolioPage)
 class PortfolioPageAdmin(admin.ModelAdmin):
@@ -29,3 +29,32 @@ class HomePageAdmin(admin.ModelAdmin):
     # Prevent adding a second instance
     def has_add_permission(self, request):
         return not HomePage.objects.exists()
+    
+class SkillInline(admin.TabularInline):
+    """Allows adding/editing skills directly on the SkillCategory admin page."""
+    model = Skill
+    extra = 1 # Number of extra forms to display
+    fields = ('name', 'note', 'order',)
+
+@admin.register(SkillCategory)
+class SkillCategoryAdmin(admin.ModelAdmin):
+    list_display = ('title', 'order',)
+    search_fields = ('title',)
+    inlines = [SkillInline]
+    ordering = ('order',)
+
+@admin.register(SkillsPageContent)
+class SkillsPageContentAdmin(admin.ModelAdmin):
+    # Since it's a singleton, we only want to allow editing the existing one.
+    list_display = ('main_header',)
+    fields = ('main_header', 'intro_text',)
+
+    # Restrict permissions to only allow viewing/editing, not adding/deleting
+    def has_add_permission(self, request):
+        # Allow adding if the object doesn't exist, otherwise prevent it.
+        if SkillsPageContent.objects.exists():
+            return False
+        return True
+    
+    def has_delete_permission(self, request, obj=None):
+        return False

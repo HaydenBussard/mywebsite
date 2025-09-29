@@ -94,3 +94,85 @@ class ResumeVersion(models.Model):
 
     def file_extension(self):
         return os.path.splitext(self.file.name)[1][1:].upper()  # e.g., 'PDF', 'DOCX'
+    
+class SkillCategory(models.Model):
+    """
+    Represents a category of skills (e.g., 'Technical Skills', 'Soft Skills').
+    """
+    title = models.CharField(max_length=100, unique=True, help_text="The title for this skills section (e.g., Technical Skills, Soft Skills).")
+    order = models.IntegerField(default=0, help_text="The order in which categories should appear on the page (lower number means earlier).")
+
+    class Meta:
+        verbose_name = "Skill Category"
+        verbose_name_plural = "Skill Categories"
+        ordering = ['order', 'title']
+
+    def __str__(self):
+        return self.title
+
+class Skill(models.Model):
+    """
+    Represents an individual skill item under a category.
+    """
+    category = models.ForeignKey(
+        SkillCategory,
+        on_delete=models.CASCADE,
+        related_name='skills',
+        help_text="The category this skill belongs to."
+    )
+    name = models.CharField(max_length=255, help_text="The text for the skill item (e.g., Technical Problem Solving).")
+    # Optional: You can add an extra field for a note/clarification like you had for Portuguese
+    note = models.CharField(
+        max_length=500,
+        blank=True,
+        null=True,
+        help_text="Optional note/clarification for the skill (e.g., I have not renewed that certificate)."
+    )
+    order = models.IntegerField(default=0, help_text="The order in which skills should appear within their category.")
+
+    class Meta:
+        verbose_name = "Skill Item"
+        verbose_name_plural = "Skill Items"
+        ordering = ['order', 'name']
+        unique_together = ('category', 'name') # Ensures no duplicate skill names within the same category
+
+    def __str__(self):
+        return f"{self.name} ({self.category.title})"
+
+from django.db import models
+
+# ... (SkillCategory and Skill models remain the same)
+
+class SkillsPageContent(models.Model):
+    """
+    A singleton model to hold the customizable content for the Skills page.
+    """
+    # MODIFIED: Added blank=True and null=True
+    main_header = models.CharField(
+        max_length=200,
+        default="My Skills",
+        blank=True, # Allows the field to be empty in the Admin form
+        null=True,  # Allows the database to store NULL if the field is empty
+        help_text="The main heading for the page (e.g., 'My Skills', 'Skillset Breakdown'). Leave blank to display no main header."
+    )
+    # ... (intro_text and the rest of the model remain the same)
+    intro_text = models.TextField(
+        blank=True,
+        null=True,
+        help_text="Optional introductory text for the skills page."
+    )
+
+    class Meta:
+        verbose_name = "Skills Page Content (Singleton)"
+        verbose_name_plural = "Skills Page Content (Singleton)"
+
+    def __str__(self):
+        return "Skills Page Content"
+
+    # Enforce the singleton pattern
+    def save(self, *args, **kwargs):
+        self.pk = 1
+        super(SkillsPageContent, self).save(*args, **kwargs)
+
+    def delete(self, *args, **kwargs):
+        pass # Prevent deletion
